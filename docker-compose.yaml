@@ -47,3 +47,22 @@ services:
     depends_on:
     - mysql
     - cart
+  abbitmq:
+    image: rabbitmq:3
+    container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: roboshop
+      RABBITMQ_DEFAULT_PASS: roboshop123
+    volumes:
+    - rabbitmq:/var/lib/rabbitmq
+  payment:
+    image: fardeenabid1023/payment:v1
+    container_name: payment
+    environment:
+      CART_HOST: cart
+      CART_PORT: 8080
+      USER_HOST: user
+      USER_PORT: 8080
+      AMQP_HOST: rabbitmq
+      AMQP_USER: roboshop
+      AMQP_PASS: roboshop123  
