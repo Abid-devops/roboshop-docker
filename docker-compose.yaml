@@ -47,7 +47,7 @@ services:
     depends_on:
     - mysql
     - cart
-  abbitmq:
+  rabbitmq:
     image: rabbitmq:3
     container_name: rabbitmq
     environment:
